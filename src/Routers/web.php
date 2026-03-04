@@ -8,6 +8,7 @@ use App\Config\DependencyProvider;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\RecuperarSenha\RecuperarSenhaController;
+use App\Http\Controllers\Livro\LivroController;
 
 $router = new Router();
 $auth = new Auth();
@@ -18,6 +19,7 @@ $dependencyProvider->register();
 $authController = $container->get(AuthController::class);
 $userController = $container->get(UserController::class);
 $recuperarSenhaController = $container->get(RecuperarSenhaController::class);
+$livroController = $container->get(LivroController::class);
 
 // - Rotas
 
@@ -38,5 +40,11 @@ $router->create("DELETE", "/usuarios/{uuid}", [$userController, 'destroy'], $aut
 //recuperar-senha
 $router->create("POST", "/recuperar-senha/enviar-codigo", [$recuperarSenhaController, 'sendVerificationCode']);
 $router->create("PUT", "/recuperar-senha", [$recuperarSenhaController, 'changePassword']);
+
+$router->create("GET", "/livros", [$livroController, 'index'], $auth);
+$router->create("POST", "/livros", [$livroController, 'store'], $auth);
+$router->create("PUT", "/livros/{uuid}", [$livroController, 'update'], $auth);
+$router->create("POST", "/livros/{uuid}/cover", [$livroController, 'updateCover']);
+$router->create("DELETE", "/livros/{uuid}", [$livroController, 'destroy'], $auth);
 
 return $router;

@@ -6,6 +6,8 @@ use App\Domain\Repositories\User\UserRepositoryInterface;
 use App\Infra\Persistence\User\UserRepository;
 use App\Domain\Repositories\RecuperarSenha\RecuperarSenhaRepositoryInterface;
 use App\Infra\Persistence\RecuperarSenha\RecuperarSenhaRepository;
+use App\Domain\Repositories\Livro\LivroRepositoryInterface;
+use App\Infra\Persistence\Livro\LivroRepository;
 
 class DependencyProvider {
 
@@ -27,6 +29,12 @@ class DependencyProvider {
             ->set(
                 RecuperarSenhaRepositoryInterface::class,
                 new RecuperarSenhaRepository()
+            );
+
+        $this->container
+            ->set(
+                LivroRepositoryInterface::class,
+                new LivroRepository()
             );
 
     }

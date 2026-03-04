@@ -11,6 +11,8 @@
 /vendor/
 
 public/img/users/**
+public/img/covers/**
 !public/img/users/default.png
+!public/img/covers/default.png
 
 /googleauthcredentials.json

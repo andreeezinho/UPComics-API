@@ -7,7 +7,6 @@ use App\Http\Request\Request;
 use App\Domain\Repositories\User\UserRepositoryInterface;
 use App\Http\Transformer\User\UserTransformer;
 use App\Infra\Services\File\FileService;
-use App\Infra\Services\Log\LogService;
 use App\Infra\Services\Email\EmailService;
 
 class UserController extends Controller {
@@ -29,7 +28,7 @@ class UserController extends Controller {
         $users = $this->userRepository->all($params);
         
         return $this->respJson([
-            'message' => "Usuários listados",
+            'message' => "Usuários encontrados",
             'data' => UserTransformer::transformArray($users)
         ]);
     }
