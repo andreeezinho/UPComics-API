@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Domain\Repositories\User;
+namespace App\Domain\Repositories\Volume;
 
-interface UserRepositoryInterface {
-
-    public function login(string $email, string $senha);
+interface VolumeRepositoryInterface {
 
     public function all(array $params);
 

@@ -11,7 +11,7 @@ trait FindTrait {
 
         $stmt->execute([":$field" => $value]);
 
-        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, self::CLASS_NAME);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, static::$className);
         $result = $stmt->fetch();
 
         if(empty($result)){

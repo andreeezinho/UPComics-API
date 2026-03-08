@@ -23,7 +23,7 @@ trait CrudTrait {
 
         $stmt->execute($params);
 
-        return $stmt->fetchAll(PDO::FETCH_CLASS, self::CLASS_NAME);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, static::$className);
     }
 
     public function save($data){
