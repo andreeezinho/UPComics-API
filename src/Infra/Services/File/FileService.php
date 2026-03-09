@@ -43,11 +43,27 @@ class FileService {
     }
 
     private function imageVerify($file) : bool {
-         $allowedTypes = [
+        $allowedTypes = [
             'image/jpeg',
             'image/png',
             'image/webp',
             'image/svg+xml'
+        ];
+
+        $finfo = new \finfo(FILEINFO_MIME_TYPE);
+        $mimeType = $finfo->file($file['tmp_name']);
+
+        return in_array($mimeType, $allowedTypes, true);
+    }
+
+     private function pdfVerify($file) : bool {
+        $allowedTypes = [
+            'application/pdf',
+            'application/x-pdf',
+            'application/acrobat',
+            'applications/vnd.pdf',
+            'text/pdf',
+            'text/x-pdf'
         ];
 
         $finfo = new \finfo(FILEINFO_MIME_TYPE);

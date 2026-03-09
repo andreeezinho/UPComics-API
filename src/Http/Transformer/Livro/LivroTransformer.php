@@ -19,10 +19,10 @@ class LivroTransformer {
         ];  
     }
 
-    public static function transformArray(array $users) : array {
+    public static function transformArray(array $livros) : array {
         return array_map(function(Livro $data) {
             return self::transform($data);
-        }, $users);
+        }, $livros);
     }
 
 }

@@ -8,6 +8,8 @@ use App\Domain\Repositories\RecuperarSenha\RecuperarSenhaRepositoryInterface;
 use App\Infra\Persistence\RecuperarSenha\RecuperarSenhaRepository;
 use App\Domain\Repositories\Livro\LivroRepositoryInterface;
 use App\Infra\Persistence\Livro\LivroRepository;
+use App\Domain\Repositories\Volume\VolumeRepositoryInterface;
+use App\Infra\Persistence\Volume\VolumeRepository;
 
 class DependencyProvider {
 
@@ -35,6 +37,12 @@ class DependencyProvider {
             ->set(
                 LivroRepositoryInterface::class,
                 new LivroRepository()
+            );
+        
+        $this->container
+            ->set(
+                VolumeRepositoryInterface::class,
+                new VolumeRepository()
             );
 
     }

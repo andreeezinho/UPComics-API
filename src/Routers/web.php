@@ -9,6 +9,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\RecuperarSenha\RecuperarSenhaController;
 use App\Http\Controllers\Livro\LivroController;
+use App\Http\Controllers\Volume\VolumeController;
 
 $router = new Router();
 $auth = new Auth();
@@ -20,6 +21,7 @@ $authController = $container->get(AuthController::class);
 $userController = $container->get(UserController::class);
 $recuperarSenhaController = $container->get(RecuperarSenhaController::class);
 $livroController = $container->get(LivroController::class);
+$volumeController = $container->get(VolumeController::class);
 
 // - Rotas
 
@@ -41,10 +43,18 @@ $router->create("DELETE", "/usuarios/{uuid}", [$userController, 'destroy'], $aut
 $router->create("POST", "/recuperar-senha/enviar-codigo", [$recuperarSenhaController, 'sendVerificationCode']);
 $router->create("PUT", "/recuperar-senha", [$recuperarSenhaController, 'changePassword']);
 
+//livros
 $router->create("GET", "/livros", [$livroController, 'index'], $auth);
 $router->create("POST", "/livros", [$livroController, 'store'], $auth);
 $router->create("PUT", "/livros/{uuid}", [$livroController, 'update'], $auth);
 $router->create("POST", "/livros/{uuid}/cover", [$livroController, 'updateCover']);
 $router->create("DELETE", "/livros/{uuid}", [$livroController, 'destroy'], $auth);
+
+//volumes
+$router->create("GET", "/volumes", [$volumeController, 'index'], $auth);
+$router->create("POST", "/volumes/{livro_uuid}", [$volumeController, 'store'], $auth);
+$router->create("PUT", "/volumes/{livro_uuid}/{uuid}", [$volumeController, 'update'], $auth);
+$router->create("POST", "/volumes/{livro_uuid}/{uuid}/file", [$volumeController, 'updateFile'], $auth);
+$router->create("DELETE", "/volumes/{livro_uuid}/{uuid}", [$volumeController, 'destroy'], $auth);
 
 return $router;
